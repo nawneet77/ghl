@@ -48,18 +48,18 @@ def register_all_tools():
 
 def main():
     async def silent_check():
-    import os
-    print("\n🔍 DEBUG: Checking env vars")
-    print("CLIENT_ID:", os.getenv("GHL_CLIENT_ID"))
-    print("CLIENT_SECRET:", os.getenv("GHL_CLIENT_SECRET"))
-    print("REDIRECT_URI:", os.getenv("GHL_REDIRECT_URI"))
-
-    async with StandardModeSetup() as setup:
-        auth_valid, message = setup.check_auth_status()
-        if not auth_valid:
-            print(f"\n❌ ERROR: {message}\nPlease verify .env variables.", file=sys.stderr)
-            return False
-        return True
+        import os
+        print("\n🔍 DEBUG: Checking env vars")
+        print("CLIENT_ID:", os.getenv("GHL_CLIENT_ID"))
+        print("CLIENT_SECRET:", os.getenv("GHL_CLIENT_SECRET"))
+        print("REDIRECT_URI:", os.getenv("GHL_REDIRECT_URI"))
+    
+        async with StandardModeSetup() as setup:
+            auth_valid, message = setup.check_auth_status()
+            if not auth_valid:
+                print(f"\n❌ ERROR: {message}\nPlease verify .env variables.", file=sys.stderr)
+                return False
+            return True
 
 
     setup_result = asyncio.run(silent_check())
